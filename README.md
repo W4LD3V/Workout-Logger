@@ -1,4 +1,4 @@
-# Exercise Logger - Track and Analyze Your Workouts
+# Workout Logger - Track and Analyze Your Workouts
 
 #### Video Demo: https://youtu.be/FVPnNtJor8E
 
