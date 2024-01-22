@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <form action="/" method="post">
+        <div class="mb-3">
+        <select name="exercise_id">
+            <option disabled selected>Select Type</option>
+            {% for type in workout_types%}
+                <option value="{{ type["ExerciseID"] }}">{{ type["ExerciseName"] }}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+    <div>
+        <table class="table table-striped dataTable">
+            <thead>
+                <tr>
+                    <td>Date</td>
+                    <td>Total Sets</td>
+                    <td>Total Reps</td>
+                    <!-- <td>Total Weight</td> -->
+                    <td>Workout Type</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in processed_workouts %}
+                <tr>
+                    <!-- Reikia padaryti <a> tag'a kad linkintu i history/{item["id"]} -->
+                    <td>{{ item["WorkoutDate"] }}</td>
+                    <td>{{ item["TotalSets"] }}</td>
+                    <td>{{ item["TotalReps"] }}</td>
+                    <!-- <td>{{ item["TotalWeight"] }}</td> -->
+                    <td>{{ item["Exercises"] | unique | list | join("\t") }}</td>
+                </tr>
+                {% endfor %}            
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.dataTable').DataTable();
+        });
+    </script>        
+{% endblock %}

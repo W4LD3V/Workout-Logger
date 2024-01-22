@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+    <div>
+        <table class="table table-striped dataTable">
+            <thead>
+                <tr>
+                    <td>Exercise Name</td>
+                    <td>Description</td>
+                    <td>Muscle Group</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in exercise_data %}
+                <tr>
+                    <td>{{ item["ExerciseName"] }}</td>
+                    <td>{{ item["Description"] }}</td>
+                    <td>{{ item["MuscleGroup"] }}</td>
+                </tr>
+                {% endfor %}            
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.dataTable').DataTable();
+        });
+    </script>        
+{% endblock %}

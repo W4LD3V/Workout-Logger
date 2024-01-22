@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Workout
+{% endblock %}
+
+{% block main %}
+    <h1 style="margin-bottom: 20px;">{{ exercise_data.ExerciseName }}</h1>
+    <form action="/add" method="post" style="margin-bottom: 20px;">
+        <div class="mb-3">
+            <input type="hidden" name="workout_id" value="{{ workout_id }}">
+            <input type="hidden" name="exercise_id" value="{{ exercise_data.ExerciseID }}">
+            <input type="hidden" name="workout_exercise_id" value="{{ workout_exercise_data.WorkoutExerciseID }}">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="reps" name="reps" placeholder="Reps:" type="number">
+            <input autocomplete="off" class="form-control mx-auto w-auto" id="weight" name="weight" placeholder="Weight:" type="number">
+        </div>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+    <table class="table table-striped">
+        <tr>
+            <th>Set</th>
+            <th>Reps</th>
+            <th>Weight</th>
+        </tr>
+        {% for rep in rep_data %}
+        <tr>
+            <td>{{ rep["SetNumber"] }}</td>
+            <td>{{ rep["RepNumber"] }}</td>
+            <td>{{ rep["Weight"] }}</td>
+        </tr>
+        {% endfor %}    
+        <tfoot>            
+            <tr>
+                <td>{{ total_sets }}</td>
+                <td>{{ total_reps }}</td>
+                <td>TOTALS</td>
+                <!-- <td>{{ total_weight }}</td> -->
+            </tr>
+        </tfoot>
+  </table>
+  <div>
+      <form action="/" method="post">
+          <div class="mb-3">
+          <select name="exercise_id">
+              <option disabled selected>Select Type</option>
+              {% for type in workout_types%}
+                  <option value="{{ type["ExerciseID"] }}">{{ type["ExerciseName"] }}</option>
+              {% endfor %}
+          </select>
+          <button class="btn btn-primary" type="submit">Add new</button>
+          </div>
+      </form>
+  </div>
+{% endblock %}
