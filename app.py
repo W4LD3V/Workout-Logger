@@ -8,6 +8,13 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import error, login_required
 
+import sys
+print("Python version")
+print(sys.version)
+print("Version info.")
+print(sys.version_info)
+
+
 # Configure application
 app = Flask(__name__)
 
@@ -308,3 +315,7 @@ def statistics():
         total_sets=total_sets,
         heaviest_weight=heaviest_weight
     )
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5001))
+    app.run(host='0.0.0.0', port=port)
